@@ -23,8 +23,8 @@ public class Pedido {
     private Integer cantidad;
 
     @Column(name = "id_usuario")
-    private Long idUsuario;
+    private Long usuario;
 
     @Column(name = "id_producto")
-    private Long idProducto;
+    private Long producto;
 }

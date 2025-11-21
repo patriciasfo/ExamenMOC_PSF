@@ -1,10 +1,8 @@
 package com.example.ExamenMOC_PSF.controller;
 
-import com.codeandcoke.amazonapi.domain.User;
-import com.codeandcoke.amazonapi.service.UserService;
+import com.example.ExamenMOC_PSF.entity.Usuario;
+import com.example.ExamenMOC_PSF.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,16 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioController {
 
     @Autowired
-    private UserService userService;
+    private UsuarioService usuarioService;
 
-    // Register user
-    @PostMapping(value = "/users")
-    public ResponseEntity<User> addUser(@RequestBody User user) {
-        User newUser = userService.addUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+    @PostMapping(value = "/usuarios")
+    public Usuario addUsuario(@RequestBody Usuario usu) {
+        return this.usuarioService.addUsuario(usu);
     }
 
-    // TODO Iniciar sesión (seguridad)
-
-    // TODO Cerrar sesión (seguridad)
 }

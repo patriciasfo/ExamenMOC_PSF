@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface PedidoService {
     Pedido addPedido(Pedido pedido);
-    List<Pedido> buscarPedidos(Usuario usu);
+    List<Pedido> buscarPedidos(Long usu);
 }

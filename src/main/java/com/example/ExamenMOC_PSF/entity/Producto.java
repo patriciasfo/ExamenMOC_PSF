@@ -31,7 +31,4 @@ public class Producto {
     private String observaciones;
     @Column
     private Integer cantidad;
-
-    @OneToMany(mappedBy = "producto")
-    private List<Pedido> pedidos;
 }

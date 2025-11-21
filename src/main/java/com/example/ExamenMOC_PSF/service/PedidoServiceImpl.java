@@ -20,7 +20,7 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public List<Pedido> buscarPedidos(Usuario usu) {
+    public List<Pedido> buscarPedidos(Long usu) {
         return this.pedidoRepository.findByUsuario(usu);
     }
 }

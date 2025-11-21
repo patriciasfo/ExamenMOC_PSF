@@ -29,7 +29,4 @@ public class Usuario {
     @Column(name = "fecha_nacimiento")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaNacimiento;
-
-    @OneToMany(mappedBy = "usuario")
-    private List<Pedido> pedidos;
 }

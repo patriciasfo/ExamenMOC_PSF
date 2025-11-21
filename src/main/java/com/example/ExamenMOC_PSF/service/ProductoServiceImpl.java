@@ -35,8 +35,8 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
-    public List<Producto> findByPrecioYCategoria(float precio, String categoria) {
-        return this.productoRepository.findByPrecioYCategoria(precio, categoria);
+    public List<Producto> findByPrecioAndCategoria(float precio, String categoria) {
+        return this.productoRepository.findByPrecioAndCategoria(precio, categoria);
     }
 
     @Override
