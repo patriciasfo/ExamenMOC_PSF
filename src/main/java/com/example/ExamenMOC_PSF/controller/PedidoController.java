@@ -1,61 +1,34 @@
 package com.example.ExamenMOC_PSF.controller;
 
-import com.codeandcoke.amazonapi.domain.Product;
-import com.codeandcoke.amazonapi.domain.User;
-import com.codeandcoke.amazonapi.dto.ErrorResponse;
-import com.codeandcoke.amazonapi.dto.OrderInDTO;
-import com.codeandcoke.amazonapi.dto.OrderOutDTO;
-import com.codeandcoke.amazonapi.exception.ProductNotFoundException;
-import com.codeandcoke.amazonapi.exception.UserNotFoundException;
-import com.codeandcoke.amazonapi.service.OrderService;
-import com.codeandcoke.amazonapi.service.ProductService;
-import com.codeandcoke.amazonapi.service.UserService;
+import com.example.ExamenMOC_PSF.entity.Pedido;
+import com.example.ExamenMOC_PSF.entity.Usuario;
+import com.example.ExamenMOC_PSF.service.PedidoService;
+import com.example.ExamenMOC_PSF.service.ProductoService;
+import com.example.ExamenMOC_PSF.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class PedidoController {
 
     @Autowired
-    private UserService userService;
+    private UsuarioService usuarioService;
     @Autowired
-    private ProductService productService;
+    private ProductoService productoService;
     @Autowired
-    private OrderService orderService;
+    private PedidoService pedidoService;
 
-    @PostMapping(value = "/user/{userId}/orders")
-    public ResponseEntity<OrderOutDTO> addOrder(@PathVariable long userId, @RequestBody OrderInDTO orderDTO)
-        throws ProductNotFoundException, UserNotFoundException {
-        User user = userService.findUser(userId);
-        Product product = productService.findProduct(orderDTO.getProductId());
-        OrderOutDTO orderOutDTO = orderService.addOrder(orderDTO, product, user);
-        return new ResponseEntity<>(orderOutDTO, HttpStatus.CREATED);
+    @PostMapping(value = "/usuario/pedidos")
+    public Pedido addPedido(@RequestBody Pedido pedido) {
+        return this.pedidoService.addPedido(pedido);
     }
 
-    @GetMapping(value = "/user/{userId}/orders")
-    public ResponseEntity<List<OrderInDTO>> getOrders(@PathVariable long userId) {
-        return null;
-    }
-
-    // TODO Delete order
-
-    // TODO Modify order
-
-    // TODO Deliver order
-
-    @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleException(ProductNotFoundException pnfe) {
-        ErrorResponse errorResponse = new ErrorResponse(101, pnfe.getMessage());
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleException(UserNotFoundException unfe) {
-        ErrorResponse errorResponse = new ErrorResponse(101, unfe.getMessage());
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    @GetMapping(value = "/usuario/{usuId}/pedidos")
+    public List<Pedido> buscarPedidos(@PathVariable Long usuId) {
+        Optional<Usuario> usu = this.usuarioService.findUsuario(usuId);
+        return usu.map(usuario -> this.pedidoService.buscarPedidos(usuario)).orElse(null);
     }
 }

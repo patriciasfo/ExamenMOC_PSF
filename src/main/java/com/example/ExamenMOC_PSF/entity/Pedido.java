@@ -1,31 +1,30 @@
 package com.example.ExamenMOC_PSF.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "pedidos")
+@Table(name = "pedidos")
 public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+
     @Column
     private LocalDate fecha;
+
     @Column
-    private int cantidad;
+    private Integer cantidad;
 
-    @ManyToOne
-    @JoinColumn(name = "idUsuario")
-    private Usuario usuario;
+    @Column(name = "id_usuario")
+    private Long idUsuario;
 
-    @ManyToOne
-    @JoinColumn(name = "idProducto")
-    private Producto producto;
+    @Column(name = "id_producto")
+    private Long idProducto;
 }
