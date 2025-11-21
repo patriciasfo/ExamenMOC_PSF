@@ -30,14 +30,15 @@ public class ProductoController {
     }
 
     @GetMapping(value = "/productos")
-    public List<Producto> getProductos(@RequestParam(defaultValue = "0") float precio,
+    public List<Producto> getProductos(@RequestParam(defaultValue = "0.0") Float precio,
                                      @RequestParam(defaultValue = "") String categoria) {
         List<Producto> productos = null;
-
-        if ((precio != 0) && (categoria.isEmpty())) {
-            productos = this.productoService.findByPrecio(precio);
-        } else {
+        if ((precio != 0.0 && !categoria.isEmpty()) || (precio == 0.0 && categoria.isEmpty())){
             productos = this.productoService.findAllProductos();
+        } else if (precio != 0.0){
+            productos = this.productoService.findByPrecio(precio);
+        } else{
+            productos = this.productoService.findByCategoria(categoria);
         }
 
         return productos;
