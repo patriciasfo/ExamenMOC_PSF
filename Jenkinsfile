@@ -41,8 +41,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 bat """
-                    echo "Starting new instance..."
-                    nohup java -jar target/*.jar > app.log 2>&1 &
+                    echo "Starting deploy..."
+                    java -jar target/ExamenMOC_PSF-1.0.0.jar
                 """
             }
         }
