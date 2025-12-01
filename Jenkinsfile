@@ -52,7 +52,7 @@ pipeline {
                 success{
                     bat 'echo "Se crea el directorio versiones con la última versión de la api"'
                     bat 'mkdir versiones'
-                    bat 'xcopy /Y ".\\target\\ExamenMOC_PSF-1.0.0.jar" ".\\versiones\\"'
+                    bat 'xcopy /Y ".\\target\\ExamenMOC_PSF-${VERSION}.jar" ".\\versiones\\"'
                 }
             }
         }
