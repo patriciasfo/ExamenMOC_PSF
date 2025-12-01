@@ -6,6 +6,10 @@ pipeline {
         maven 'Maven3.9.11'
     }
 
+    environment {
+            VERSION = "1.0.0" // Define la variable de versión
+        }
+
     stages {
 
         stage('Checkout') {
@@ -38,13 +42,27 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Move jar') {
+            steps{
+                bat 'echo "Eliminando directorio versiones...."'
+                bat 'rmdir /s /q versiones'
+            }
+            post {
+                success{
+                    bat 'echo "Se crea el directorio versiones con la última versión de la api"'
+                    bat 'mkdir versiones'
+                    bat 'copy /Y target/ExamenMOC_PSF-${VERSION}.jar versiones'
+                }
+            }
+        }
+
+        /*stage('Deploy') {
             steps {
                 bat """
                     echo "Starting deploy..."
-                    java -jar target/ExamenMOC_PSF-1.0.0.jar
+                    java -jar target/ExamenMOC_PSF-${VERSION}.jar
                 """
             }
-        }
+        }*/
     }
 }
