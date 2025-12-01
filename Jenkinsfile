@@ -45,7 +45,7 @@ pipeline {
         stage('Move jar') {
             steps{
                 bat 'echo "Eliminando directorio versiones...."'
-                bat 'rmdir /s /q versiones'
+                bat 'rmdir /s /q "versiones"'
             }
             post {
                 success{
