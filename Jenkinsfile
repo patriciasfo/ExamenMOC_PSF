@@ -45,8 +45,8 @@ pipeline {
         stage('Move jar') {
             steps{
                 bat 'echo "Eliminando directorio versiones...."'
-                //bat 'if exist "versiones" (rd /s /q "versiones")'
-                bat 'rd /s /q "versiones" 2>null' // 2>null redirige los errores
+                bat 'if exist "versiones" (rd /s /q "versiones")'
+                //bat 'rd /s /q "versiones" 2>null' // 2>null redirige los errores
             }
             post {
                 success{
