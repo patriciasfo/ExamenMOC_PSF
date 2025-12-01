@@ -45,13 +45,14 @@ pipeline {
         stage('Move jar') {
             steps{
                 bat 'echo "Eliminando directorio versiones...."'
-                bat 'if exist "versiones" (rd /s /q "versiones")'
+                //bat 'if exist "versiones" (rd /s /q "versiones")'
+                bat 'rd /s /q "versiones" 2>null' // 2>null redirige los errores
             }
             post {
                 success{
                     bat 'echo "Se crea el directorio versiones con la última versión de la api"'
                     bat 'mkdir versiones'
-                    bat 'copy /Y target/ExamenMOC_PSF-${VERSION}.jar versiones'
+                    bat 'copy /Y "target/ExamenMOC_PSF-${VERSION}.jar" "versiones"'
                 }
             }
         }
