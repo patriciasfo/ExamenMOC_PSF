@@ -38,17 +38,6 @@ pipeline {
             }
         }
 
-        stage('Stop Previous Instance') {
-            steps {
-                bat """
-                    if pgrep -f "ExamenMOC_PSF-1.0.0.jar"; then
-                        echo "Stopping previous instance..."
-                        pkill -f ExamenMOC_PSF-1.0.0.jar
-                    fi
-                """
-            }
-        }
-
         stage('Deploy') {
             steps {
                 bat """
