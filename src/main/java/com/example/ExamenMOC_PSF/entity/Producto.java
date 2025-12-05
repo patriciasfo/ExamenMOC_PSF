@@ -30,4 +30,7 @@ public class Producto {
     private String observaciones;
     @Column
     private Integer cantidad;
+
+    public Producto(long l, String prod1, String desc, String cat1, float v, Object o, String observaciones, int i) {
+    }
 }
