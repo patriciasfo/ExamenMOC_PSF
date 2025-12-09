@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -35,6 +36,7 @@ class ProductoControllerTest {
 
         Producto respuesta = this.productoController.addProducto(new Producto(1L, "prod1", "desc", "cat1", 2.4f, null, "observaciones", 3));
         Assertions.assertEquals(respuesta, esperado);
+        Mockito.verify(this.servicio).addProducto(Mockito.any());
     }
 
 }
